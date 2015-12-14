@@ -11,7 +11,7 @@
  * Time: 00:15
  */
 
-namespace twLib;
+namespace twhiston\twLib;
 
 class Arr {
 

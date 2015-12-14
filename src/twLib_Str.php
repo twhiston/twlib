@@ -13,7 +13,7 @@
  * http://www.thomaswhiston.com
  */
 
-namespace twLib;
+namespace twhiston\twLib;
 
 class Str {
 

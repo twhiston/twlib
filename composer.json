@@ -1,0 +1,8 @@
+{
+  "name": "twhiston/twLib",
+  "autoload": {
+    "psr-0" : {
+      "twhiston\\twLib" : "src"
+    }
+  }
+}

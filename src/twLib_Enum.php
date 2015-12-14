@@ -3,7 +3,6 @@
  * Part of twLib
  * http://www.thomaswhiston.com
  */
-namespace twLib;
 
 /**
  * Created by PhpStorm.
@@ -21,6 +20,8 @@ namespace twLib;
  *     const Saturday = 6;
  *   }
  */
+
+namespace twhiston\twLib;
 
 abstract class Enum {
 
