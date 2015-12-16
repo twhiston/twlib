@@ -60,6 +60,10 @@ abstract class Enum {
     $values = array_values(self::getConstants());
     return in_array($value, $values, $strict = true);
   }
+
+  public static function getName($value){
+    return array_search($value, self::getConstants());
+  }
 }
 
 
