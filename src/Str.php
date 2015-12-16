@@ -31,6 +31,19 @@ class Str {
     return false;
   }
 
+  /**
+   * @param $haystack
+   * @param $needles
+   * @return bool
+   */
+  static public function endsWith($haystack, $needles) {
+    foreach ((array) $needles as $needle)
+    {
+      if (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE) return true;
+    }
+    return FALSE;
+  }
+
 
 };
 
