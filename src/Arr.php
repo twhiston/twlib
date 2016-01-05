@@ -13,8 +13,6 @@
 
 namespace twhiston\twLib;
 
-use twhiston\twLib\Str;
-
 class Arr {
 
   /**
@@ -23,12 +21,12 @@ class Arr {
    * @param $key
    * @return bool
    */
-  static public function hasKey(&$arr,$key){
+  static public function hasKey(&$arr, $key) {
 
     if (isset($arr[$key]) || array_key_exists($key, $arr)) {
-        return true;
+      return TRUE;
     }
-    return false;
+    return FALSE;
   }
 
 
@@ -40,12 +38,12 @@ class Arr {
    * @param $division
    * @return array
    */
-  static public function getKeysByLastDivision(&$arr,$division){
+  static public function getKeysByLastDivision(&$arr, $division) {
 
     $return = array();
     foreach ($arr as $key => $value) {
       if (($pos = strrpos($key, $division)) !== FALSE) {
-        $return[] = substr($key, $pos+1);
+        $return[] = substr($key, $pos + 1);
       }
     }
     return $return;
@@ -59,12 +57,12 @@ class Arr {
    * @param $division
    * @return array
    */
-  static public function getKeysByFirstDivision(&$arr,$division){
+  static public function getKeysByFirstDivision(&$arr, $division) {
 
     $return = array();
     foreach ($arr as $key => $value) {
       if (($pos = strpos($key, $division)) !== FALSE) {
-        $return[] = substr($key, 0,$pos);
+        $return[] = substr($key, 0, $pos);
       }
     }
     return $return;
@@ -80,12 +78,12 @@ class Arr {
    * @param $division
    * @return array
    */
-  static public function getDataByLastKeyDivision(&$arr,$division){
+  static public function getDataByLastKeyDivision(&$arr, $division) {
 
     $return = array();
     foreach ($arr as $key => $value) {
       if (($pos = strrpos($key, $division)) !== FALSE) {
-        $return[substr($key, $pos+1)] = $value;
+        $return[substr($key, $pos + 1)] = $value;
       }
     }
     return $return;
@@ -101,12 +99,12 @@ class Arr {
    * @param $division
    * @return array
    */
-  static public function getDataByFirstKeyDivision(&$arr,$division){
+  static public function getDataByFirstKeyDivision(&$arr, $division) {
 
     $return = array();
     foreach ($arr as $key => $value) {
       if (($pos = strpos($key, $division)) !== FALSE) {
-        $return[substr($key, 0,$pos)] = $value;
+        $return[substr($key, 0, $pos)] = $value;
       }
     }
     return $return;
@@ -119,7 +117,7 @@ class Arr {
    * @param $contains string to test for
    * @return array  members of $arr whos key contains $contains
    */
-  static public function filterKeyContains(&$arr, $contains){
+  static public function filterKeyContains(&$arr, $contains) {
     $results = array();
     foreach ($arr as $key => $value) {
       if (($pos = strpos($key, $contains)) !== FALSE) {
@@ -135,7 +133,7 @@ class Arr {
    * @param $contains string to test for
    * @return array  members of $arr whos key !contains $contains
    */
-  static public function filterKeyNotContains(&$arr, $contains){
+  static public function filterKeyNotContains(&$arr, $contains) {
     $results = array();
     foreach ($arr as $key => $value) {
       if (($pos = strpos($key, $contains)) === FALSE) {
@@ -151,10 +149,10 @@ class Arr {
    * @param $startwith string
    * @return array
    */
-  static public function filterKeyStartsWith(&$arr, $startwith){
+  static public function filterKeyStartsWith(&$arr, $startwith) {
     $results = array();
     foreach ($arr as $key => $value) {
-      if (Str::startsWith($key,$startwith) === TRUE) {
+      if (Str::startsWith($key, $startwith) === TRUE) {
         $results[$key] = $value;
       }
     }
@@ -167,10 +165,10 @@ class Arr {
    * @param $endswith string
    * @return array
    */
-  static public function filterKeyEndsWith(&$arr, $endswith){
+  static public function filterKeyEndsWith(&$arr, $endswith) {
     $results = array();
     foreach ($arr as $key => $value) {
-      if (Str::endsWith($key,$endswith) === TRUE) {
+      if (Str::endsWith($key, $endswith) === TRUE) {
         $results[$key] = $value;
       }
     }

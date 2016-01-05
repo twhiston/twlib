@@ -23,17 +23,20 @@ class Str {
    * @param $needles
    * @return bool|string if an array is passed in the matching string will be returned, else true/false
    */
-  static public function startsWith($haystack, $needles)
-  {
-    if(is_array($needles)){
-      foreach ((array) $needles as $needle)
-      {
-        if ($needle != '' && strpos($haystack, $needle) === 0) return $needle;
+  static public function startsWith($haystack, $needles) {
+    if (is_array($needles)) {
+      foreach ((array) $needles as $needle) {
+        if ($needle != '' && strpos($haystack, $needle) === 0) {
+          return $needle;
+        }
       }
-    } else {
-        if ($needles != '' && strpos($haystack, $needles) === 0) return TRUE;
     }
-    return false;
+    else {
+      if ($needles != '' && strpos($haystack, $needles) === 0) {
+        return TRUE;
+      }
+    }
+    return FALSE;
   }
 
   /**
@@ -42,13 +45,27 @@ class Str {
    * @return array|bool if an array is passed in the matching string will be returned, else true/false
    */
   static public function endsWith($haystack, $needles) {
-    if(is_array($needles)){
-      foreach ((array) $needles as $needle)
-      {
-        if (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE) return $needle;
+    if (is_array($needles)) {
+      foreach ((array) $needles as $needle) {
+        if (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos(
+            $haystack,
+            $needle,
+            $temp
+          ) !== FALSE
+        ) {
+          return $needle;
+        }
       }
-    } else {
-      if (($temp = strlen($haystack) - strlen($needles)) >= 0 && strpos($haystack, $needles, $temp) !== FALSE) return true;
+    }
+    else {
+      if (($temp = strlen($haystack) - strlen($needles)) >= 0 && strpos(
+          $haystack,
+          $needles,
+          $temp
+        ) !== FALSE
+      ) {
+        return TRUE;
+      }
     }
     return FALSE;
   }
@@ -59,23 +76,28 @@ class Str {
    * @param $needles
    * @return array|bool if an array is passed in the matching string will be returned, else true/false
    */
-  static public function contains($haystack, $needles){
+  static public function contains($haystack, $needles) {
 
-    if(is_array($needles)){
+    if (is_array($needles)) {
       $results = array();
-      foreach ((array) $needles as $needle)
-      {
-        if (strpos($haystack, $needle) !== FALSE) $results[] =  $needle;
+      foreach ((array) $needles as $needle) {
+        if (strpos($haystack, $needle) !== FALSE) {
+          $results[] = $needle;
+        }
       }
-      if(empty($results)) return false;
+      if (empty($results)) {
+        return FALSE;
+      }
       return $results;
-    } else {
-      if (strpos($haystack, $needles) !== FALSE) return TRUE;
+    }
+    else {
+      if (strpos($haystack, $needles) !== FALSE) {
+        return TRUE;
+      }
     }
     return FALSE;
 
   }
 
 
-};
-
+}

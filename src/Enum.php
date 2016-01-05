@@ -31,7 +31,8 @@ abstract class Enum {
    * Enum constructor.
    * Private to prevent instantiation
    */
-  private function __construct(){}
+  private function __construct() {
+  }
 
   /**
    * @return mixed
@@ -53,7 +54,7 @@ abstract class Enum {
    * @param bool|FALSE $strict
    * @return bool
    */
-  public static function isValidName($name, $strict = false) {
+  public static function isValidName($name, $strict = FALSE) {
     $constants = self::getConstants();
 
     if ($strict) {
@@ -70,14 +71,14 @@ abstract class Enum {
    */
   public static function isValidValue($value) {
     $values = array_values(self::getConstants());
-    return in_array($value, $values, $strict = true);
+    return in_array($value, $values, $strict = TRUE);
   }
 
   /**
    * @param $value
    * @return mixed
    */
-  public static function getName($value){
+  public static function getName($value) {
     return array_search($value, self::getConstants());
   }
 }
