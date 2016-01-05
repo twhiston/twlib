@@ -13,6 +13,8 @@
 
 namespace twhiston\twLib;
 
+use twhiston\twLib\Str;
+
 class Arr {
 
   /**
@@ -143,6 +145,26 @@ class Arr {
     $results = array();
     foreach ($arr as $key => $value) {
       if (($pos = strpos($key, $contains)) === FALSE) {
+        $results[$key] = $value;
+      }
+    }
+    return $results;
+  }
+
+  static public function getKeyStartsWith(&$arr, $startwith){
+    $results = array();
+    foreach ($arr as $key => $value) {
+      if (Str::startsWith($key,$startwith) === TRUE) {
+        $results[$key] = $value;
+      }
+    }
+    return $results;
+  }
+
+  static public function getKeyEndsWith(&$arr, $startwith){
+    $results = array();
+    foreach ($arr as $key => $value) {
+      if (Str::endsWith($key,$startwith) === TRUE) {
         $results[$key] = $value;
       }
     }

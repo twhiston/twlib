@@ -22,6 +22,9 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
       'this_is_a_drupal_naming_convention' => 'whatever',
       'node_form_type_edit' => 0,
       'entity_something' => new \stdClass(),
+      'ends_with_entity' => 1,
+      'in_the_entity_middle' => 2,
+      'another_ends_in_entity' => 2,
     ];
 
     $this->testArr2 = [
@@ -78,7 +81,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
     $result = Arr::getDataByFirstKeyDivision($this->testArr,'_');
     $this->assertArrayHasKey('this',$result);
     $this->assertInternalType('integer',$result['node']);
-    $this->assertCount(3,$result);
+    $this->assertCount(5,$result);
 
   }
 
@@ -87,7 +90,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
     $result = Arr::getDataByLastKeyDivision($this->testArr,'_');
     $this->assertArrayHasKey('edit',$result);
     $this->assertInstanceOf('stdClass',$result['something']);
-    $this->assertCount(3,$result);
+    $this->assertCount(5,$result);
 
   }
 
@@ -115,6 +118,17 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('whatever',array_values($result1)[0]);
     $this->assertArraySubset($result, $this->testArr);
 
+  }
+
+  public function testGetKeyStartsWith(){
+    $result = Arr::getKeyStartsWith($this->testArr,'entity');
+    $this->assertCount(1,$result);
+
+  }
+
+  public function testGetKeyEndsWith(){
+    $result = Arr::getKeyEndsWith($this->testArr,'entity');
+    $this->assertCount(2,$result);
   }
 
 }
