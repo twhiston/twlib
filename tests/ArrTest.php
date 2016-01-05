@@ -6,7 +6,7 @@
  * Time: 15:41
  */
 
-//namespace twhiston\twLib\tests;
+namespace twhiston\twLib\tests;
 
 use twhiston\twLib\Arr;
 
@@ -81,7 +81,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
     $result = Arr::getDataByFirstKeyDivision($this->testArr,'_');
     $this->assertArrayHasKey('this',$result);
     $this->assertInternalType('integer',$result['node']);
-    $this->assertCount(5,$result);
+    $this->assertCount(6,$result);
 
   }
 
@@ -97,7 +97,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
   public function testGetKeyContains(){
 
     $result = Arr::getKeyContains($this->testArr, '_');
-    $this->assertCount(3,$result);
+    $this->assertCount(6,$result);
     $this->assertArraySubset($result, $this->testArr);
 
     $result1 = Arr::getKeyContains($this->testArr, 'node');
@@ -114,7 +114,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
     $this->assertCount(0,$result);
 
     $result1 = Arr::getKeyNotContains($this->testArr, 'key');
-    $this->assertCount(3,$result1);
+    $this->assertCount(6,$result1);
     $this->assertEquals('whatever',array_values($result1)[0]);
     $this->assertArraySubset($result, $this->testArr);
 
