@@ -27,6 +27,16 @@ class RandTest extends \PHPUnit_Framework_TestCase {
 
   public function testRandInt(){
 
+    $rando = Rand::Int(0, 1);
+    $this->assertNotNull($rando);
+    $this->assertLessThanOrEqual(1,$rando);
+    $this->assertGreaterThanOrEqual(0,$rando);
+
+    $rando = Rand::Int(1985, 1987);
+    $this->assertNotNull($rando);
+    $this->assertLessThanOrEqual(1987,$rando);
+    $this->assertGreaterThanOrEqual(1985,$rando);
+
     $rando = Rand::Int(0, 100);
     $this->assertNotNull($rando);
     $this->assertLessThanOrEqual(100,$rando);
@@ -50,6 +60,33 @@ class RandTest extends \PHPUnit_Framework_TestCase {
     $this->assertNotNull($rando);
     $this->assertLessThanOrEqual($max,$rando);
     $this->assertGreaterThanOrEqual($min,$rando);
+
+  }
+
+  public function testRandString(){
+    $rs = Rand::String(20);
+    $this->assertEquals(20,strlen($rs));
+
+    $rs1 = Rand::String(32);
+    $this->assertEquals(32,strlen($rs1));
+
+    $this->assertNotEquals($rs,$rs1);
+
+  }
+
+  public function testSecureInt(){
+
+    $rando = Rand::SecureInt(0, 1);
+    $this->assertNotNull($rando);
+    $this->assertLessThanOrEqual(1,$rando);
+    $this->assertGreaterThanOrEqual(0,$rando);
+
+    $rando1 = Rand::SecureInt(12976, 12980);
+    $this->assertNotNull($rando1);
+    $this->assertLessThanOrEqual(12980,$rando1);
+    $this->assertGreaterThanOrEqual(12976,$rando1);
+
+    $this->assertNotEquals($rando,$rando1);
 
   }
 
