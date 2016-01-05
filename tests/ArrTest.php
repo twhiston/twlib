@@ -94,13 +94,13 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
 
   }
 
-  public function testGetKeyContains(){
+  public function testFilterKeyContains(){
 
-    $result = Arr::getKeyContains($this->testArr, '_');
+    $result = Arr::filterKeyContains($this->testArr, '_');
     $this->assertCount(6,$result);
     $this->assertArraySubset($result, $this->testArr);
 
-    $result1 = Arr::getKeyContains($this->testArr, 'node');
+    $result1 = Arr::filterKeyContains($this->testArr, 'node');
     $this->assertCount(1,$result1);
     $this->assertEquals(0,array_values($result1)[0]);
     $this->assertArraySubset($result, $this->testArr);
@@ -108,26 +108,26 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
 
   }
 
-  public function testGetKeyNotContains(){
+  public function testFilterKeyNotContains(){
 
-    $result = Arr::getKeyNotContains($this->testArr, '_');
+    $result = Arr::filterKeyNotContains($this->testArr, '_');
     $this->assertCount(0,$result);
 
-    $result1 = Arr::getKeyNotContains($this->testArr, 'key');
+    $result1 = Arr::filterKeyNotContains($this->testArr, 'key');
     $this->assertCount(6,$result1);
     $this->assertEquals('whatever',array_values($result1)[0]);
     $this->assertArraySubset($result, $this->testArr);
 
   }
 
-  public function testGetKeyStartsWith(){
-    $result = Arr::getKeyStartsWith($this->testArr,'entity');
+  public function testFilterKeyStartsWith(){
+    $result = Arr::filterKeyStartsWith($this->testArr,'entity');
     $this->assertCount(1,$result);
 
   }
 
-  public function testGetKeyEndsWith(){
-    $result = Arr::getKeyEndsWith($this->testArr,'entity');
+  public function testFilterKeyEndsWith(){
+    $result = Arr::filterKeyEndsWith($this->testArr,'entity');
     $this->assertCount(2,$result);
   }
 

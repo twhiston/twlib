@@ -27,12 +27,15 @@ abstract class Enum {
 
   private static $constCacheArray = NULL;
 
-  private function __construct(){
-    /*
-      Preventing instantiation
-    */
-  }
+  /**
+   * Enum constructor.
+   * Private to prevent instantiation
+   */
+  private function __construct(){}
 
+  /**
+   * @return mixed
+   */
   private static function getConstants() {
     if (self::$constCacheArray == NULL) {
       self::$constCacheArray = [];
@@ -45,6 +48,11 @@ abstract class Enum {
     return self::$constCacheArray[$calledClass];
   }
 
+  /**
+   * @param $name
+   * @param bool|FALSE $strict
+   * @return bool
+   */
   public static function isValidName($name, $strict = false) {
     $constants = self::getConstants();
 
@@ -56,11 +64,19 @@ abstract class Enum {
     return in_array(strtolower($name), $keys);
   }
 
+  /**
+   * @param $value
+   * @return bool
+   */
   public static function isValidValue($value) {
     $values = array_values(self::getConstants());
     return in_array($value, $values, $strict = true);
   }
 
+  /**
+   * @param $value
+   * @return mixed
+   */
   public static function getName($value){
     return array_search($value, self::getConstants());
   }

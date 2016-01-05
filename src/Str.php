@@ -18,9 +18,10 @@ namespace twhiston\twLib;
 class Str {
 
   /**
+   * Does the string start with
    * @param $haystack
    * @param $needles
-   * @return bool
+   * @return bool|string if an array is passed in the matching string will be returned, else true/false
    */
   static public function startsWith($haystack, $needles)
   {
@@ -38,7 +39,7 @@ class Str {
   /**
    * @param $haystack
    * @param $needles
-   * @return bool
+   * @return array|bool if an array is passed in the matching string will be returned, else true/false
    */
   static public function endsWith($haystack, $needles) {
     if(is_array($needles)){
@@ -56,7 +57,7 @@ class Str {
    * Does the haystack contain needles? If array in will return array out or false
    * @param $haystack
    * @param $needles
-   * @return array|bool
+   * @return array|bool if an array is passed in the matching string will be returned, else true/false
    */
   static public function contains($haystack, $needles){
 

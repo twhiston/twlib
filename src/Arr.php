@@ -46,8 +46,6 @@ class Arr {
     foreach ($arr as $key => $value) {
       if (($pos = strrpos($key, $division)) !== FALSE) {
         $return[] = substr($key, $pos+1);
-      } else {
-        //TODO if the key does not exist then do something?
       }
     }
     return $return;
@@ -67,8 +65,6 @@ class Arr {
     foreach ($arr as $key => $value) {
       if (($pos = strpos($key, $division)) !== FALSE) {
         $return[] = substr($key, 0,$pos);
-      } else {
-        //TODO if the key does not exist then do something?
       }
     }
     return $return;
@@ -90,8 +86,6 @@ class Arr {
     foreach ($arr as $key => $value) {
       if (($pos = strrpos($key, $division)) !== FALSE) {
         $return[substr($key, $pos+1)] = $value;
-      } else {
-        //TODO if the key does not exist then do something?
       }
     }
     return $return;
@@ -99,7 +93,9 @@ class Arr {
 
   /**
    * Convenience function to rekey an array by a division
-   * With this functions an array of ['node_edit_form' = 'whatever', 'user_edit_form' = new stdClass ]
+   * With this functions an array of
+   * ['node_edit_form' = 'whatever', 'user_edit_form' = new stdClass , 'nodelimiterhere' = 0]
+   * with division '_'
    * would return an array of ['node' = 'whatever','user' = stdClass]
    * @param $arr
    * @param $division
@@ -111,8 +107,6 @@ class Arr {
     foreach ($arr as $key => $value) {
       if (($pos = strpos($key, $division)) !== FALSE) {
         $return[substr($key, 0,$pos)] = $value;
-      } else {
-        //TODO if the key does not exist then do something?
       }
     }
     return $return;
@@ -125,7 +119,7 @@ class Arr {
    * @param $contains string to test for
    * @return array  members of $arr whos key contains $contains
    */
-  static public function getKeyContains(&$arr, $contains){
+  static public function filterKeyContains(&$arr, $contains){
     $results = array();
     foreach ($arr as $key => $value) {
       if (($pos = strpos($key, $contains)) !== FALSE) {
@@ -141,7 +135,7 @@ class Arr {
    * @param $contains string to test for
    * @return array  members of $arr whos key !contains $contains
    */
-  static public function getKeyNotContains(&$arr, $contains){
+  static public function filterKeyNotContains(&$arr, $contains){
     $results = array();
     foreach ($arr as $key => $value) {
       if (($pos = strpos($key, $contains)) === FALSE) {
@@ -151,7 +145,13 @@ class Arr {
     return $results;
   }
 
-  static public function getKeyStartsWith(&$arr, $startwith){
+  /**
+   * return an array of values filtered by the key starting with $startswith
+   * @param $arr []
+   * @param $startwith string
+   * @return array
+   */
+  static public function filterKeyStartsWith(&$arr, $startwith){
     $results = array();
     foreach ($arr as $key => $value) {
       if (Str::startsWith($key,$startwith) === TRUE) {
@@ -161,16 +161,20 @@ class Arr {
     return $results;
   }
 
-  static public function getKeyEndsWith(&$arr, $startwith){
+  /**
+   * return an array of values filtered by the key ending with $endswith
+   * @param $arr []
+   * @param $endswith string
+   * @return array
+   */
+  static public function filterKeyEndsWith(&$arr, $endswith){
     $results = array();
     foreach ($arr as $key => $value) {
-      if (Str::endsWith($key,$startwith) === TRUE) {
+      if (Str::endsWith($key,$endswith) === TRUE) {
         $results[$key] = $value;
       }
     }
     return $results;
   }
 
-
 }
-
