@@ -64,9 +64,17 @@ class Rand {
       $min = $temp;
     }
     $rand = NULL;
+    $manual = TRUE;
     if(phpversion() >= 7){
-      $rand = random_int ( $min , $max );
-    } else {
+      try {
+        $rand = random_int($min, $max);
+        $manual = FALSE;
+      } catch (\Exception $e){
+        $manual = TRUE;
+      }
+    }
+
+    if($manual === TRUE) {
       //http://stackoverflow.com/questions/1313223/replace-rand-with-openssl-random-pseudo-bytes
       $secure = FALSE;
       $diff = $max - $min;
@@ -95,14 +103,11 @@ class Rand {
       } while (True);  // because goto attracts velociraptors
       $rand = $num + $min;
     }
-
     if($rand === NULL){
       //We must not be NULL here, we could be 0, but if we are NULL then something went wrong with generation
       throw new TwLibException('Rand could not be generated');
     }
-
     return $rand;
-
   }
 
   /**
