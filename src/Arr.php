@@ -28,8 +28,7 @@ class Arr {
     }
     return FALSE;
   }
-
-
+  
   /**
    * Convenience function to get the last part of a key from an array by a division character
    * With this functions an array of ['node_edit_form' = 'whatever', 'user_edit_form' = new stdClass ]
@@ -47,6 +46,22 @@ class Arr {
       }
     }
     return $return;
+  }
+
+  /**
+   * Convenience function to get keys containing a string
+   * @param $arr      array to test
+   * @param $contains string to test for
+   * @return array  members of $arr whos key contains $contains
+   */
+  static public function getKeyContains(&$arr, $contains) {
+    $results = array();
+    foreach ($arr as $key => $value) {
+      if (($pos = strpos($key, $contains)) !== FALSE) {
+        $results[] = $key;
+      }
+    }
+    return $results;
   }
 
   /**
@@ -78,7 +93,7 @@ class Arr {
    * @param $division
    * @return array
    */
-  static public function getDataByLastKeyDivision(&$arr, $division) {
+  static public function reKeyByLastKeyDivision(&$arr, $division) {
 
     $return = array();
     foreach ($arr as $key => $value) {
@@ -99,7 +114,7 @@ class Arr {
    * @param $division
    * @return array
    */
-  static public function getDataByFirstKeyDivision(&$arr, $division) {
+  static public function reKeyByFirstKeyDivision(&$arr, $division) {
 
     $return = array();
     foreach ($arr as $key => $value) {

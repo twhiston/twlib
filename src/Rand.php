@@ -49,7 +49,7 @@ class Rand {
   }
 
   /**
-   * Manual secure int version based on http://stackoverflow.com/questions/1313223/replace-rand-with-openssl-random-pseudo-bytes SECURE
+   * Manual secure int version based on http://stackoverflow.com/questions/1313223/replace-rand-with-openssl-random-pseudo-bytes SECURE-ish
    * @param $min
    * @param $max
    * @param bool|TRUE $pedantic
