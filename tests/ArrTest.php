@@ -28,6 +28,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
       'this&is&a&drupal&naming&convention' => 'whatever',
       'node&form&type&edit' => 0,
       'entity&something' => new \stdClass(),
+      'nokeyhere' => NULL,
     ];
   }
 
@@ -53,6 +54,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('convention',$result[0]);
     $this->assertEquals('edit',$result[1]);
     $this->assertEquals('something',$result[2]);
+    $this->assertCount(3,$result);//only 3 as last key does not have the key in
   }
 
   public function testGetKeysByFirstDivision(){
@@ -68,6 +70,51 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('convention',$result[0]);
     $this->assertEquals('edit',$result[1]);
     $this->assertEquals('something',$result[2]);
+    $this->assertCount(3,$result);
+  }
+
+  public function testGetDataByFirstKeyDivision(){
+
+    $result = Arr::getDataByFirstKeyDivision($this->testArr,'_');
+    $this->assertArrayHasKey('this',$result);
+    $this->assertInternalType('integer',$result['node']);
+    $this->assertCount(3,$result);
+
+  }
+
+  public function testGetDataByLastKeyDivision(){
+
+    $result = Arr::getDataByLastKeyDivision($this->testArr,'_');
+    $this->assertArrayHasKey('edit',$result);
+    $this->assertInstanceOf('stdClass',$result['something']);
+    $this->assertCount(3,$result);
+
+  }
+
+  public function testGetKeyContains(){
+
+    $result = Arr::getKeyContains($this->testArr, '_');
+    $this->assertCount(3,$result);
+    $this->assertArraySubset($result, $this->testArr);
+
+    $result1 = Arr::getKeyContains($this->testArr, 'node');
+    $this->assertCount(1,$result1);
+    $this->assertEquals(0,array_values($result1)[0]);
+    $this->assertArraySubset($result, $this->testArr);
+
+
+  }
+
+  public function testGetKeyNotContains(){
+
+    $result = Arr::getKeyNotContains($this->testArr, '_');
+    $this->assertCount(0,$result);
+
+    $result1 = Arr::getKeyNotContains($this->testArr, 'key');
+    $this->assertCount(3,$result1);
+    $this->assertEquals('whatever',array_values($result1)[0]);
+    $this->assertArraySubset($result, $this->testArr);
+
   }
 
 }

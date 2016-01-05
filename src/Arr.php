@@ -73,6 +73,82 @@ class Arr {
 
   }
 
+  /**
+   * Convenience function to rekey an array by a division
+   * With this functions an array of ['node_edit_form' = 'whatever', 'user_edit_form' = new stdClass ]
+   * would return an array of ['form' = stdClass]
+   * If your keys share a final part of their key they will get overwritten. Sucks to be you
+   * @param $arr
+   * @param $division
+   * @return array
+   */
+  static public function getDataByLastKeyDivision(&$arr,$division){
+
+    $return = array();
+    foreach ($arr as $key => $value) {
+      if (($pos = strrpos($key, $division)) !== FALSE) {
+        $return[substr($key, $pos+1)] = $value;
+      } else {
+        //TODO if the key does not exist then do something?
+      }
+    }
+    return $return;
+  }
+
+  /**
+   * Convenience function to rekey an array by a division
+   * With this functions an array of ['node_edit_form' = 'whatever', 'user_edit_form' = new stdClass ]
+   * would return an array of ['node' = 'whatever','user' = stdClass]
+   * @param $arr
+   * @param $division
+   * @return array
+   */
+  static public function getDataByFirstKeyDivision(&$arr,$division){
+
+    $return = array();
+    foreach ($arr as $key => $value) {
+      if (($pos = strpos($key, $division)) !== FALSE) {
+        $return[substr($key, 0,$pos)] = $value;
+      } else {
+        //TODO if the key does not exist then do something?
+      }
+    }
+    return $return;
+
+  }
+
+  /**
+   * Convenience function to filter arrays by their key containing a string
+   * @param $arr      array to test
+   * @param $contains string to test for
+   * @return array  members of $arr whos key contains $contains
+   */
+  static public function getKeyContains(&$arr, $contains){
+    $results = array();
+    foreach ($arr as $key => $value) {
+      if (($pos = strpos($key, $contains)) !== FALSE) {
+        $results[$key] = $value;
+      }
+    }
+    return $results;
+  }
+
+  /**
+   * Convenience function to filter arrays by their key !containing a string
+   * @param $arr      array to test
+   * @param $contains string to test for
+   * @return array  members of $arr whos key !contains $contains
+   */
+  static public function getKeyNotContains(&$arr, $contains){
+    $results = array();
+    foreach ($arr as $key => $value) {
+      if (($pos = strpos($key, $contains)) === FALSE) {
+        $results[$key] = $value;
+      }
+    }
+    return $results;
+  }
+
 
 }
 
