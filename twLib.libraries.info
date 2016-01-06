@@ -1,7 +1,10 @@
 name = twLib
 machine name = twLib
 description = Provides an interface to the twLib
-version = 1
-files[php][] = src/twLib_Str.php
-files[php][] = src/twLib_Enum.php
-files[php][] = src/twLib_Arr.php
+version = 1.1
+files[php][] = src/Arr.php
+files[php][] = src/Enum.php
+files[php][] = src/Rand.php
+files[php][] = src/Str.php
+files[php][] = src/TwLibException.php
+
