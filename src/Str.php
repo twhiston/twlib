@@ -15,10 +15,15 @@
 
 namespace twhiston\twLib;
 
+/**
+ * Class Str
+ * String helper functions
+ * @package twhiston\twLib
+ */
 class Str {
 
   /**
-   * Does the string start with
+   * Does the string start with?
    * @param $haystack
    * @param $needles
    * @return bool|string if an array is passed in the matching string will be returned, else true/false
@@ -40,6 +45,7 @@ class Str {
   }
 
   /**
+   * Does the string end with?
    * @param $haystack
    * @param $needles
    * @return array|bool if an array is passed in the matching string will be returned, else true/false

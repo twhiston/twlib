@@ -9,6 +9,12 @@
 namespace twhiston\twLib;
 
 
+/**
+ * Class Rand
+ * Generate random ints within range or random string
+ * Will always try to use php7 functions where possible, but if earlier only semi secure int generation is possible
+ * @package twhiston\twLib
+ */
 class Rand {
 
 

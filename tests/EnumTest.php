@@ -38,6 +38,7 @@ class EnumTest extends \PHPUnit_Framework_TestCase {
     $this->assertTrue(DaysOfWeek::isValidValue(6));
     $this->assertTrue(DaysOfWeek::isValidValue(DaysOfWeek::Wednesday));
 
+    $this->assertFalse(DaysOfWeek::isValidValue('Wednesday'));
     $this->assertFalse(DaysOfWeek::isValidValue(7));
     $this->assertFalse(DaysOfWeek::isValidValue('Blorp'));
     $this->assertFalse(DaysOfWeek::isValidValue('ssh8s8a9a9hs8m8saaaml,el'));

@@ -1,2 +1,4 @@
 .idea
 vendor
+phpdoc.dist.xml
+phpdocs

@@ -78,7 +78,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
 
   public function testGetDataByFirstKeyDivision(){
 
-    $result = Arr::getDataByFirstKeyDivision($this->testArr,'_');
+    $result = Arr::reKeyByFirstKeyDivision($this->testArr,'_');
     $this->assertArrayHasKey('this',$result);
     $this->assertInternalType('integer',$result['node']);
     $this->assertCount(6,$result);
@@ -87,7 +87,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
 
   public function testGetDataByLastKeyDivision(){
 
-    $result = Arr::getDataByLastKeyDivision($this->testArr,'_');
+    $result = Arr::reKeyByLastKeyDivision($this->testArr,'_');
     $this->assertArrayHasKey('edit',$result);
     $this->assertInstanceOf('stdClass',$result['something']);
     $this->assertCount(5,$result);

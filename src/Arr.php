@@ -13,6 +13,11 @@
 
 namespace twhiston\twLib;
 
+/**
+ * Class Arr
+ * Array helper functions, reKey arrays, filter arrays, get Keys
+ * @package twhiston\twLib
+ */
 class Arr {
 
   /**
@@ -28,7 +33,7 @@ class Arr {
     }
     return FALSE;
   }
-  
+
   /**
    * Convenience function to get the last part of a key from an array by a division character
    * With this functions an array of ['node_edit_form' = 'whatever', 'user_edit_form' = new stdClass ]

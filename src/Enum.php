@@ -9,7 +9,13 @@
  * User: Thomas Whiston
  * Date: 12/12/2015
  * Time: 00:47
- *
+ */
+
+namespace twhiston\twLib;
+
+/**
+ * Class Enum
+ *  PHP Enum implementation
  *   abstract class DaysOfWeek extends twLib\Enum {
  *     const Sunday = 0;
  *     const Monday = 1;
@@ -19,12 +25,14 @@
  *     const Friday = 5;
  *     const Saturday = 6;
  *   }
+ * @package twhiston\twLib
  */
-
-namespace twhiston\twLib;
-
 abstract class Enum {
 
+  /**
+   * Class constants from reflection
+   * @var null
+   */
   private static $constCacheArray = NULL;
 
   /**
@@ -35,6 +43,7 @@ abstract class Enum {
   }
 
   /**
+   * get internal functions
    * @return mixed
    */
   private static function getConstants() {
@@ -50,6 +59,7 @@ abstract class Enum {
   }
 
   /**
+   * Is this name valid?, accepts string
    * @param $name
    * @param bool|FALSE $strict
    * @return bool
@@ -66,6 +76,7 @@ abstract class Enum {
   }
 
   /**
+   * Is the value valid for our enum, accepts int
    * @param $value
    * @return bool
    */
@@ -75,6 +86,7 @@ abstract class Enum {
   }
 
   /**
+   * Get the enum member name as a string from the value
    * @param $value
    * @return mixed
    */
