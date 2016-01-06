@@ -195,4 +195,77 @@ class Arr {
     return $results;
   }
 
+
+  /**
+   * Filter an array by value
+   * @param $arr
+   * @param $value
+   * @return array Array of entries that contain $value
+   */
+  static public function filterHasValue(&$arr, $value){
+    $results = array();
+
+    //test what type the value is
+    $type = gettype($value);
+    foreach ($arr as $key => $val) {
+      //we can only compare if the types match
+      if(gettype($val) === $type){
+        if ($val == $value) {
+          $results[$key] = $val;
+        }
+      }
+    }
+    return $results;
+  }
+
+  /**
+   * Filter an array by !value
+   * @param $arr
+   * @param $value
+   * @return array Array of entries that do not contain $value
+   */
+  static public function filterHasNotValue(&$arr, $value){
+    $results = array();
+
+    //test what type the value is
+    $type = gettype($value);
+    foreach ($arr as $key => $val) {
+      //we can only compare if the types match
+      if(gettype($val) === $type){
+        if ($val !== $value) {
+          $results[$key] = $val;
+        }
+      }
+    }
+    return $results;
+  }
+
+  /**
+   * Filter by a type, takes internal type or fully qualified class name
+   * @param $arr
+   * @param $type
+   * @return array Array of entries that are of $type
+   */
+  static public function filterByType(&$arr, $type){
+    $results = array();
+
+    if(!is_string($type)){
+      $type = gettype($type);
+    }
+
+    foreach ($arr as $key => $val) {
+      //do types match
+
+      if(is_object($val)){
+        $t = get_class($val);
+      } else {
+        $t = gettype($val);
+      }
+      if($t === $type){
+          $results[$key] = $val;
+      }
+    }
+    return $results;
+  }
+
 }

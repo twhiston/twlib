@@ -9,12 +9,15 @@
 namespace twhiston\twLib\tests;
 
 use twhiston\twLib\Arr;
+use twhiston\twLib\Rand;
 
 class ArrTest extends \PHPUnit_Framework_TestCase {
 
   public $testArr;
 
   public $testArr2;
+
+  public $testArr3;
 
   public function __construct() {
      parent::__construct();
@@ -32,6 +35,12 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
       'node&form&type&edit' => 0,
       'entity&something' => new \stdClass(),
       'nokeyhere' => NULL,
+    ];
+
+    $this->testArr3 = [
+      'class' => new Arr(),
+      'another' => new Rand(),
+      'more' => new Arr(),
     ];
   }
 
@@ -129,6 +138,66 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
   public function testFilterKeyEndsWith(){
     $result = Arr::filterKeyEndsWith($this->testArr,'entity');
     $this->assertCount(2,$result);
+  }
+
+  public function testFilterHasValue(){
+    $result = Arr::filterHasValue($this->testArr,0);
+    $this->assertCount(1,$result);
+    $this->assertArrayHasKey('node_form_type_edit',$result);
+    $this->assertArraySubset($result, $this->testArr);
+    foreach ($result as $key => $item) {
+      $this->assertEquals(0,$item);
+    }
+
+    $result = Arr::filterHasValue($this->testArr,2);
+    $this->assertCount(2,$result);
+    $this->assertArrayHasKey('another_ends_in_entity',$result);
+    $this->assertArraySubset($result, $this->testArr);
+    foreach ($result as $key => $item) {
+      $this->assertEquals(2,$item);
+    }
+  }
+
+  public function testFilterHasNotValue(){
+    $result = Arr::filterHasNotValue($this->testArr,0);
+    $this->assertCount(3,$result);
+    $this->assertArrayHasKey('in_the_entity_middle',$result);
+    $this->assertArraySubset($result, $this->testArr);
+    foreach ($result as $key => $item) {
+      $this->assertNotEquals(0,$item);
+    }
+
+    $result = Arr::filterHasNotValue($this->testArr,2);
+    $this->assertCount(2,$result);
+    $this->assertArrayHasKey('ends_with_entity',$result);
+    $this->assertArraySubset($result, $this->testArr);
+    foreach ($result as $key => $item) {
+      $this->assertNotEquals(2,$item);
+    }
+  }
+
+  public function testFilterType(){
+    $result = Arr::filterByType($this->testArr,'string');
+    $this->assertCount(1,$result);
+    $this->assertArrayHasKey('this_is_a_drupal_naming_convention',$result);
+
+    $result = Arr::filterByType($this->testArr,'integer');
+    $this->assertCount(4,$result);
+    $this->assertArrayHasKey('node_form_type_edit',$result);
+
+
+    $result = Arr::filterByType($this->testArr,'stdClass');
+    $this->assertCount(1,$result);
+    $this->assertArrayHasKey('entity_something',$result);
+
+    $result = Arr::filterByType($this->testArr3,'twhiston\twLib\Arr');
+    $this->assertCount(2,$result);
+    $this->assertArrayHasKey('class',$result);
+
+    $result = Arr::filterByType($this->testArr3,'twhiston\twLib\Rand');
+    $this->assertCount(1,$result);
+    $this->assertArrayHasKey('another',$result);
+
   }
 
 }
