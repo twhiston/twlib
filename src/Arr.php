@@ -15,7 +15,8 @@ namespace twhiston\twLib;
 
 /**
  * Class Arr
- * Array helper functions, reKey arrays, filter arrays, get Keys
+ * Array helper functions, reKey arrays, filter arrays, get Keys for 2D Arrays
+ * 3D arrays will only work on the top level
  * @package twhiston\twLib
  */
 class Arr {
