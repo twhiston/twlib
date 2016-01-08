@@ -1,3 +1,5 @@
-### twLib
+# twLib
 
-Some useful php functions that you can use
+Some useful PHP functions
+
+DOCUMENTATION: http://twlib.thomaswhiston.com/

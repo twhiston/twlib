@@ -60,7 +60,7 @@ abstract class Enum {
 
   /**
    * Is this name valid?, accepts string
-   * @param $name
+   * @param $name string
    * @param bool|FALSE $strict
    * @return bool
    */
