@@ -9,7 +9,7 @@
 namespace twhiston\twLib\tests;
 
 
-use twhiston\twLib\Rand;
+use twhiston\twLib\Rand\Rand;
 
 class RandTest extends \PHPUnit_Framework_TestCase {
 

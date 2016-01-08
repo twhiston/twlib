@@ -6,7 +6,7 @@
  * Time: 23:04
  */
 
-namespace twhiston\twLib;
+namespace twhiston\twLib\Rand;
 
 
 /**

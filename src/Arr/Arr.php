@@ -11,7 +11,9 @@
  * Time: 00:15
  */
 
-namespace twhiston\twLib;
+namespace twhiston\twLib\Arr;
+
+use twhiston\twLib\Str\Str;
 
 /**
  * Class Arr

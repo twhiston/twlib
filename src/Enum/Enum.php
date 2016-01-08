@@ -11,7 +11,7 @@
  * Time: 00:47
  */
 
-namespace twhiston\twLib;
+namespace twhiston\twLib\Enum;
 
 /**
  * Class Enum

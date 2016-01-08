@@ -8,8 +8,8 @@
 
 namespace twhiston\twLib\tests;
 
-use twhiston\twLib\Arr;
-use twhiston\twLib\Rand;
+use twhiston\twLib\Arr\Arr;
+use twhiston\twLib\Rand\Rand;
 
 class ArrTest extends \PHPUnit_Framework_TestCase {
 
@@ -190,11 +190,11 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
     $this->assertCount(1,$result);
     $this->assertArrayHasKey('entity_something',$result);
 
-    $result = Arr::filterByType($this->testArr3,'twhiston\twLib\Arr');
+    $result = Arr::filterByType($this->testArr3,'twhiston\twLib\Arr\Arr');
     $this->assertCount(2,$result);
     $this->assertArrayHasKey('class',$result);
 
-    $result = Arr::filterByType($this->testArr3,'twhiston\twLib\Rand');
+    $result = Arr::filterByType($this->testArr3,'twhiston\twLib\Rand\Rand');
     $this->assertCount(1,$result);
     $this->assertArrayHasKey('another',$result);
 

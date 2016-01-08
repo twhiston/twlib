@@ -8,7 +8,7 @@
 
 namespace twhiston\twLib\tests;
 
-use twhiston\twLib\Enum;
+use twhiston\twLib\Enum\Enum;
 
   abstract class DaysOfWeek extends Enum {
      const Sunday = 0;

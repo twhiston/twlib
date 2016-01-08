@@ -6,7 +6,7 @@
  * Time: 23:03
  */
 
-namespace twhiston\twLib;
+namespace twhiston\twLib\TwLibException;
 
 
 /**
