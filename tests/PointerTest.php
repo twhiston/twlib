@@ -13,7 +13,6 @@ use twhiston\twLib\Pointer\Pointer;
 /**
  * Class PointerTest
  * @package twhiston\twLib\tests
- * @group failing
  */
 class PointerTest extends \PHPUnit_Framework_TestCase
 {
@@ -111,9 +110,7 @@ class PointerTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /**
-     * @group failing
-     */
+
     public function testPointer()
     {
 
