@@ -37,7 +37,11 @@ class Stack implements \ArrayAccess, \Iterator, \Countable
      * @param $data
      */
     public function takeReference(&$data){
-        $this->stack[] = new Pointer($data);
+        if($data instanceof Pointer){
+            $this->stack[] = $data;
+        } else{
+            $this->stack[] = new Pointer($data);
+        }
     }
     
     /**
@@ -128,15 +132,13 @@ class Stack implements \ArrayAccess, \Iterator, \Countable
      * Remove the Pointer from the top of the stack
      */
     public function pop(){
-        $tmp = end($this->stack);
-        unset($this->stack[key($this->stack)]);
-        return $tmp;
+        return array_pop($this->stack);
     }
 
     /**
      * Remove the Pointer from the bottom of the stack
      */
-    public function pull(){
+    public function shift(){
           return array_shift($this->stack);
     }
 

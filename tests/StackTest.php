@@ -81,7 +81,7 @@ class StackTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/show me the sunshine/',$p->copy());
         $this->assertRegExp('/show me the sunshine/',$ref);
 
-        $pl = $s->pull();
+        $pl = $s->shift();
         $cl = count($s);
         $this->assertEquals($cp-1,$cl);//assert our array got smaller
         $pa = &$pl->getRef();
@@ -94,6 +94,22 @@ class StackTest extends \PHPUnit_Framework_TestCase
             unset($s[$k]);
         }
 
+    }
+
+    public function testArrayCount(){
+
+        $d1 = 23;
+        $d2 = 'string it';
+        $d3 = 'more';
+        $d4 = 'd4';
+
+        $s = new Stack();
+        $s[] = $d1;
+        $s[] = $d2;
+        $p = $s->pop();
+
+        $s[] = $d3;
+        $s->takeReference($d3);
     }
 
 }
