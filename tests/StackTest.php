@@ -56,6 +56,44 @@ class StackTest extends \PHPUnit_Framework_TestCase
         $g = $s[2];
         $g->set('bo selecta');
 
+        //Test that you cant alter the top if you forget to take it by reference
+        /** @var Pointer $top */
+        $top = $s->top();
+        $tr = $top->getRef();
+        $tr =  'beans';
+        $this->assertRegExp('/bo selecta/',$ref);
+
+        //Test that you do alter the location if you take it by reference
+        /** @var Pointer $top */
+        $top = &$s->top();
+        $tr = &$top->getRef();
+        $tr =  'beans';
+        $this->assertRegExp('/beans/',$ref);
+
+        //Pop the top item off the stack
+        $cs = count($s);
+        /** @var Pointer $p */
+        $p = $s->pop();
+        $cp = count($s);
+        $this->assertEquals($cs-1,$cp);//assert our array got smaller
+        $ra = &$p->getRef();
+        $ra = 'show me the sunshine';
+        $this->assertRegExp('/show me the sunshine/',$p->copy());
+        $this->assertRegExp('/show me the sunshine/',$ref);
+
+        $pl = $s->pull();
+        $cl = count($s);
+        $this->assertEquals($cp-1,$cl);//assert our array got smaller
+        $pa = &$pl->getRef();
+        $pa = 'it looks like everything is falling';
+        $this->assertRegExp('/it looks like everything is falling/',$a);
+
+
+        //goodbye stack
+        foreach($s as $k => $point){
+            unset($s[$k]);
+        }
+
     }
 
 }
