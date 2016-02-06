@@ -52,7 +52,7 @@ class Instantiate {
   private static function instantiate($class,$args){
 
     if(version_compare(phpversion(), '5.6.0', '>=')){
-      $instance = new $class(eval('...') . $args);
+      $instance = new $class(...$args);
     } else {
       $reflect  = new \ReflectionClass($class);
       $instance = ($args === NULL || $args === FALSE ) ? $reflect->newInstanceArgs() : $reflect->newInstanceArgs($args) ;
