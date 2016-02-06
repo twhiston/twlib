@@ -6,5 +6,5 @@ files[php][] = src/Arr.php
 files[php][] = src/Enum.php
 files[php][] = src/Rand.php
 files[php][] = src/Str.php
-files[php][] = src/TwLibException.php
+files[php][] = src/Exception.php
 

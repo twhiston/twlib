@@ -75,9 +75,6 @@ class StrTest extends \PHPUnit_Framework_TestCase {
   }
 
 
-  /**
-   * @group failing
-   */
   public function testGetAfter(){
 
     /**
@@ -127,9 +124,6 @@ class StrTest extends \PHPUnit_Framework_TestCase {
 
   }
 
-  /**
-   * @group failing
-   */
   public function testGetBefore(){
 
     /**

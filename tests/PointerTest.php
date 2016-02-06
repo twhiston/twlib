@@ -8,8 +8,8 @@
 
 namespace twhiston\twLib\tests;
 
-use twhiston\twLib\Pointer\Pointer;
-use twhiston\twLib\Pointer\Stack;
+use twhiston\twLib\Reference\Reference;
+use twhiston\twLib\Reference\Stack;
 
 /**
  * Class PointerTest
@@ -33,7 +33,7 @@ class PointerTest extends \PHPUnit_Framework_TestCase
 
         $stash = $item;
 
-        $p = new Pointer($item);//Reference Item
+        $p = new Reference($item);//Reference Item
 
         $this->assertEquals($item,$p->copy());
 
@@ -92,7 +92,7 @@ class PointerTest extends \PHPUnit_Framework_TestCase
 
         $p->reset($item);
 
-        $ps = new Pointer($swap);
+        $ps = new Reference($swap);
 
         //it got copied in right?
         $this->assertArrayHasKey('data',$ps->copy());

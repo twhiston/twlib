@@ -8,8 +8,10 @@
 
 namespace twhiston\twLib\tests;
 
-use twhiston\twLib\Pointer\Stack;
-use twhiston\twLib\Pointer\Pointer;
+use twhiston\twLib\Reference\Stack;
+use twhiston\twLib\Reference\Reference;
+
+use twhiston\twLib\Exception\TwLibException;
 
 /**
  * Class StackTest
@@ -25,13 +27,18 @@ class StackTest extends \PHPUnit_Framework_TestCase
         $b = 'string it up';
 
         $s = new Stack();
-
-        $pa = new Pointer($a);
-        $pb = new Pointer($b);
+        $pb = new Reference($b);
 
 
-        $s[] = $pa;
-        $s[] = $pb;
+        $s->takeReference($a);
+        $s->takeReference($pb);
+
+        try{
+            $s[] = $pb;
+        } catch (TwLibException $e){
+            $this->assertRegExp('/Do not set stack references with the array operator/',$e->getMessage());
+        }
+
 
         $this->assertEquals(23,$s[0]->copy());
         $this->assertRegExp('/string it up/',$s[1]->copy());
@@ -94,6 +101,8 @@ class StackTest extends \PHPUnit_Framework_TestCase
             unset($s[$k]);
         }
 
+        $this->assertCount(0,$s);
+
     }
 
     public function testArrayCount(){
@@ -104,12 +113,15 @@ class StackTest extends \PHPUnit_Framework_TestCase
         $d4 = 'd4';
 
         $s = new Stack();
-        $s[] = $d1;
-        $s[] = $d2;
+        $s->takeReference($d1);
+        $s->takeReference($d2);
+        $this->assertCount(2,$s);
         $p = $s->pop();
+        $this->assertCount(1,$s);
 
-        $s[] = $d3;
+        $d3 = 'when it all falls down';
         $s->takeReference($d3);
+        $this->assertCount(2,$s);
     }
 
 }

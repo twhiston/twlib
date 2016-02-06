@@ -6,23 +6,28 @@
  * Time: 20:44
  */
 
-namespace twhiston\twLib\Pointer;
+namespace twhiston\twLib\Reference;
 
+use twhiston\twLib\Exception\TwLibException;
 
 /**
  * Class Stack
  * Basic reference stack
- * add items to the stack with the [] operator if they are already a pointer
- * @package twhiston\twLib\Pointer
+ * add items to the stack with the takeReference function
+ * Though this class has array access it will throw an exception if you attempt to add anything by reference as its impossible
+ * @package twhiston\twLib\Reference
  */
 class Stack implements \ArrayAccess, \Iterator, \Countable
 {
 
     /**
-     * @var Pointer[]
+     * @var Reference[]
      */
     private $stack;
 
+    /**
+     * @var int
+     */
     private $pos;
 
     /**
@@ -36,14 +41,15 @@ class Stack implements \ArrayAccess, \Iterator, \Countable
     /**
      * @param $data
      */
-    public function takeReference(&$data){
-        if($data instanceof Pointer){
+    public function takeReference(&$data)
+    {
+        if ($data instanceof Reference) {
             $this->stack[] = $data;
-        } else{
-            $this->stack[] = new Pointer($data);
+        } else {
+            $this->stack[] = new Reference($data);
         }
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -65,11 +71,9 @@ class Stack implements \ArrayAccess, \Iterator, \Countable
      */
     public function offsetSet($offset, $value)
     {
-        if (is_null($offset)) {
-            $this->stack[] = $value;
-        } else {
-            $this->stack[$offset] = $value;
-        }
+        throw new TwLibException(
+          'Do not set stack references with the array operator'
+        );
     }
 
     /**
@@ -122,24 +126,27 @@ class Stack implements \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @return \twhiston\twLib\Pointer\Pointer
+     * @return \twhiston\twLib\Reference\Reference
      */
-    public function &top(){
-        return $this->stack[count($this->stack)-1];
+    public function &top()
+    {
+        return $this->stack[count($this->stack) - 1];
     }
 
     /**
-     * Remove the Pointer from the top of the stack
+     * Remove the Reference from the top of the stack
      */
-    public function pop(){
+    public function pop()
+    {
         return array_pop($this->stack);
     }
 
     /**
-     * Remove the Pointer from the bottom of the stack
+     * Remove the Reference from the bottom of the stack
      */
-    public function shift(){
-          return array_shift($this->stack);
+    public function shift()
+    {
+        return array_shift($this->stack);
     }
 
     /**

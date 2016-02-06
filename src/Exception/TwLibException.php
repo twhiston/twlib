@@ -6,14 +6,15 @@
  * Time: 23:03
  */
 
-namespace twhiston\twLib\TwLibException;
+namespace twhiston\twLib\Exception;
 
 
 /**
- * Class TwLibException
+ * Class Exception
  * If anything throws from twLib it will be an exception of this type
  * @package twhiston\twLib
  */
-class TwLibException extends \Exception {
+class TwLibException extends \Exception
+{
 
 }
