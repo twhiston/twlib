@@ -1,11 +1,13 @@
 <?php
 /**
+ * Part of twLib
+ * http://www.thomaswhiston.com
+ * tom.whiston@gmail.com
  * Created by PhpStorm.
  * User: Thomas Whiston
  * Date: 03/02/2016
  * Time: 20:44
  */
-
 namespace twhiston\twLib\Reference;
 
 use twhiston\twLib\Exception\TwLibException;

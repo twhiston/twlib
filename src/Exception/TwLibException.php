@@ -1,11 +1,13 @@
 <?php
 /**
+ * Part of twLib
+ * http://www.thomaswhiston.com
+ * tom.whiston@gmail.com
  * Created by PhpStorm.
  * User: Thomas Whiston
  * Date: 05/01/2016
  * Time: 23:03
  */
-
 namespace twhiston\twLib\Exception;
 
 

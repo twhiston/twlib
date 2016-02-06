@@ -1,14 +1,14 @@
 <?php
-
-namespace twhiston\twLib\Object;
-
 /**
+ * Part of twLib
+ * http://www.thomaswhiston.com
+ * tom.whiston@gmail.com
  * Created by PhpStorm.
  * User: Thomas Whiston
  * Date: 27/01/2016
  * Time: 14:14
  */
-
+namespace twhiston\twLib\Object;
 
 /**
  * Class Instantiate

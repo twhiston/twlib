@@ -2,9 +2,7 @@
 /**
  * Part of twLib
  * http://www.thomaswhiston.com
- */
-
-/**
+ * tom.whiston@gmail.com
  * Created by PhpStorm.
  * User: Thomas Whiston
  * Date: 11/12/2015
@@ -12,7 +10,6 @@
  * Part of twLib
  * http://www.thomaswhiston.com
  */
-
 namespace twhiston\twLib\Str;
 
 /**

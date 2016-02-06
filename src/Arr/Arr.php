@@ -2,15 +2,12 @@
 /**
  * Part of twLib
  * http://www.thomaswhiston.com
- */
-
-/**
+ * tom.whiston@gmail.com
  * Created by PhpStorm.
  * User: Thomas Whiston
  * Date: 12/12/2015
  * Time: 00:15
  */
-
 namespace twhiston\twLib\Arr;
 
 use twhiston\twLib\Str\Str;

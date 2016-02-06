@@ -1,13 +1,14 @@
 <?php
 /**
+ * Part of twLib
+ * http://www.thomaswhiston.com
+ * tom.whiston@gmail.com
  * Created by PhpStorm.
  * User: Thomas Whiston
  * Date: 04/01/2016
  * Time: 23:04
  */
-
 namespace twhiston\twLib\Rand;
-
 
 /**
  * Class Rand
