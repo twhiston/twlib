@@ -9,6 +9,7 @@
 namespace twhiston\twLib\tests;
 
 use twhiston\twLib\Pointer\Pointer;
+use twhiston\twLib\Pointer\Stack;
 
 /**
  * Class PointerTest
@@ -143,6 +144,42 @@ class PointerTest extends \PHPUnit_Framework_TestCase
             'hives' => new \StdClass()
           ]
         ];
+    }
+
+    public function testArrayAccess(){
+
+        $data = $this->getData();
+
+        $s = new Stack();
+        $s->takeReference($data[0]);
+        $s->takeReference($data['bees']);
+
+        $r = &$s->top();
+        $rf = &$r->getRef();
+
+        $rf[0] = 'changed';
+
+        $pt = &$rf['depth'];
+        $pt = 'you\'re superhuman';
+
+        $ind = 'depth';
+        $pn = &$rf[$ind];
+        $pn = 'if you dont want to loose me forever';
+    }
+
+    public function testTakeReferenceFromReference(){
+
+        $data = $this->getData();
+
+        $s = new Stack();
+
+        $s->takeReference($data[0]);
+
+        $ref = &$data['bees'];
+        $s->takeReference($ref);
+
+        $ref = 'i hear your voice just calling me';
+
     }
 
 }
