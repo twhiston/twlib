@@ -22,6 +22,7 @@ class DebugLogger extends AbstractLogger
 
     public function __construct(\PHPUnit_Framework_TestCase $test){
         $this->owner = $test;
+        $this->index = 0;
     }
 
     public function reset(){
