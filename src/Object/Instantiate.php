@@ -34,10 +34,14 @@ class Instantiate
     public static function make($class, $args, $namespace, $interface = null)
     {
 
-        $count = substr_count($class, '\\');
-        if ($count = 0 || !(0 === strpos($class, 'Drupal'))) {
-            //if there is no '/' we assume this is not a fully qualified namespace and make it our root Constraint namespace
-            //If there is no drupal at the start then we assume its our class further down the tree
+//        $count = substr_count($class, '\\');
+//        if ($count = 0 || !(0 === strpos($class, 'Drupal'))) {
+//            //if there is no '/' we assume this is not a fully qualified namespace and make it our root Constraint namespace
+//            //If there is no drupal at the start then we assume its our class further down the tree
+//            $class = $namespace.$class;
+//        }
+
+        if($namespace !== NULL){
             $class = $namespace.$class;
         }
 
