@@ -15,15 +15,21 @@ namespace twhiston\twLib\Object;
  * Create a class
  * @package twhiston\twLib\Object
  */
+/**
+ * Class Instantiate
+ * @package twhiston\twLib\Object
+ */
 class Instantiate
 {
+
 
     /**
      * @param $class
      * @param $args
      * @param $namespace string psr-4 style 'whatever\\thing\\another\\'
-     *
-     * @return null
+     * @param null $interface test that class implements this interface
+     * @return object
+     * @throws \Exception
      */
     public static function make($class, $args, $namespace, $interface = null)
     {
@@ -36,22 +42,35 @@ class Instantiate
         }
 
         try {
-            $imp = class_implements($class, true);
-            if (!is_array($imp)) {
-                return null;
+
+            if (!class_exists($class, true)) {
+                throw new \Exception('Class does not exist');
             }
 
             if ($interface !== null) {
-                if (!in_array($interface, $imp)) {
-                    return null;
+
+                $imp = class_implements($class, true);
+                if (!is_array($imp)) {
+                    throw new \Exception('Does not implement an interface');
                 }
+                if (!in_array($interface, $imp)) {
+                    throw new \Exception('Does not implement requested interface');
+                }
+
             }
             //Make sure args are an array
-            $args = (!is_array($args) && $args != null) ? array($args) : $args;
+            $args = (!is_array($args)) ? array($args) : $args;
+            if(is_array($args)){
+                $c =count(array_filter(array_keys($args), 'is_string'));
+                if(count(array_filter(array_keys($args), 'is_string')) > 0){
+                    $args = [$args];
+                }
+            }
             $instance = Instantiate::instantiate($class, $args);
 
-        } catch (\Exception $e) {
-            return null;
+        }
+        catch (\Exception $e) {
+            throw $e;
         }
 
         return $instance;
