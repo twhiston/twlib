@@ -29,7 +29,6 @@ class StackTest extends \PHPUnit_Framework_TestCase
         $s = new Stack();
         $pb = new Reference($b);
 
-
         $s->takeReference($a);
         $s->takeReference($pb);
 
