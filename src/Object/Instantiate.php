@@ -31,7 +31,7 @@ class Instantiate
      * @return object
      * @throws \Exception
      */
-    public static function make($class, $args, $namespace, $interface = null)
+    public static function make($class, $args, $namespace = null, $interface = null)
     {
 
 //        $count = substr_count($class, '\\');
