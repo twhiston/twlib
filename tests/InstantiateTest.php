@@ -105,7 +105,7 @@ class InstantiateTest extends \PHPUnit_Framework_TestCase {
 
 
   public function testWorking(){
-    $class = Instantiate::make('inTest',null,'twhiston\\twLib\\tests\\','twhiston\twLib\tests\testFace');
+    $class = Instantiate::make('inTest','test data','twhiston\\twLib\\tests\\','twhiston\twLib\tests\testFace');
     $this->assertInstanceOf('twhiston\\twLib\\tests\\inTest',$class);
   }
   /**

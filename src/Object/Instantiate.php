@@ -63,13 +63,16 @@ class Instantiate
 
             }
             //Make sure args are an array
-            $args = (!is_array($args)) ? array($args) : $args;
-            if(is_array($args)){
-                $c =count(array_filter(array_keys($args), 'is_string'));
-                if(count(array_filter(array_keys($args), 'is_string')) > 0){
-                    $args = [$args];
+            if($args !== NULL && $args !== FALSE){
+                $args = (!is_array($args)) ? array($args) : $args;
+                if(is_array($args)){
+                    $c =count(array_filter(array_keys($args), 'is_string'));
+                    if(count(array_filter(array_keys($args), 'is_string')) > 0){
+                        $args = [$args];
+                    }
                 }
             }
+
             $instance = Instantiate::instantiate($class, $args);
 
         }
@@ -87,14 +90,14 @@ class Instantiate
      */
     private static function instantiate($class, $args)
     {
-
-        if (version_compare(phpversion(), '5.6.0', '>=')) {
-            $instance = new $class(...$args);
-        } else {
+//BOOOOO, this produces a parse error on less than 5.6.0
+//        if (version_compare(phpversion(), '5.6.0') !== -1) {
+//            $instance = new $class(...$args);
+//        } else {
             $reflect = new \ReflectionClass($class);
             $instance = ($args === null || $args === false) ? $reflect->newInstanceArgs(
             ) : $reflect->newInstanceArgs($args);
-        }
+//        }
 
         return $instance;
     }
