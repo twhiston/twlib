@@ -31,6 +31,10 @@ class StrTest extends \PHPUnit_Framework_TestCase {
 
   }
 
+  public function testStartsWithNull(){
+    $this->assertFalse(Str::startsWith('test',null));
+  }
+
   public function testEndsWith(){
 
     $string = "yo, i am here";
@@ -47,6 +51,10 @@ class StrTest extends \PHPUnit_Framework_TestCase {
       $string,
       ['low', 'blow', 'nothing'])
     );
+  }
+
+  public function testEndsWithNull(){
+    $this->assertFalse(Str::endsWith('test',null));
   }
 
   public function testContains(){
