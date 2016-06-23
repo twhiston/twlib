@@ -58,7 +58,9 @@ class FindByNamespace
                     }
                     if (T_CLASS === $tokens[$index][0]) {
                         $index += 2; // Skip class keyword and whitespace
-                        $this->data[] = $namespace . '\\' . $tokens[$index][1];
+                        if (is_array($tokens[$index]) && array_key_exists(1, $tokens[$index])) {
+                            $this->data[] = $namespace . '\\' . $tokens[$index][1];
+                        }
                     }
                 }
             }
