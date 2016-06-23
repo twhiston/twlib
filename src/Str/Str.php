@@ -28,7 +28,7 @@ class Str
      */
     static public function startsWith($haystack, $needles)
     {
-        if($haystack === null){
+        if ($haystack === null) {
             return false;
         }
         if (is_array($needles)) {
@@ -54,28 +54,28 @@ class Str
      */
     static public function endsWith($haystack, $needles)
     {
-        if($haystack === null){
+        if ($haystack === null) {
             return false;
         }
         if (is_array($needles)) {
             foreach ((array)$needles as $needle) {
                 if (($temp = strlen($haystack) - strlen(
-                      $needle
-                    )) >= 0 && strpos(
-                    $haystack,
-                    $needle,
-                    $temp
-                  ) !== false
+                            $needle
+                        )) >= 0 && strpos(
+                        $haystack,
+                        $needle,
+                        $temp
+                    ) !== false
                 ) {
                     return $needle;
                 }
             }
         } else {
             if (($temp = strlen($haystack) - strlen($needles)) >= 0 && strpos(
-                $haystack,
-                $needles,
-                $temp
-              ) !== false
+                    $haystack,
+                    $needles,
+                    $temp
+                ) !== false
             ) {
                 return true;
             }
@@ -92,7 +92,7 @@ class Str
      */
     static public function contains($haystack, $needles)
     {
-        if($haystack === null){
+        if ($haystack === null) {
             return false;
         }
         if (is_array($needles)) {

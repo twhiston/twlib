@@ -26,11 +26,12 @@ abstract class Immutable
      * Immutable constructor.
      * This must be called from your child class to make the object immutable
      */
-    public function __construct(){
-        if($this->constructed){
+    public function __construct()
+    {
+        if ($this->constructed) {
             throw new ImmutableException('Immutable Object');
         }
-        $this->constructed = TRUE;
+        $this->constructed = true;
     }
 
     /**
@@ -38,14 +39,16 @@ abstract class Immutable
      * @param $name
      * @param $value
      */
-    final public function __set($name, $value){
+    final public function __set($name, $value)
+    {
         throw new ImmutableException('Immutable Object');
     }
 
     /**
      * Throw an exception on cloning
      */
-    final public function __clone(){
+    final public function __clone()
+    {
         throw new ImmutableException('Immutable Object');
     }
 

@@ -10,11 +10,11 @@
  */
 namespace twhiston\twLib\Object;
 
-/**
- * Class Instantiate
- * Create a class
- * @package twhiston\twLib\Object
- */
+    /**
+     * Class Instantiate
+     * Create a class
+     * @package twhiston\twLib\Object
+     */
 /**
  * Class Instantiate
  * @package twhiston\twLib\Object
@@ -41,8 +41,8 @@ class Instantiate
 //            $class = $namespace.$class;
 //        }
 
-        if($namespace !== NULL){
-            $class = $namespace.$class;
+        if ($namespace !== null) {
+            $class = $namespace . $class;
         }
 
         try {
@@ -63,11 +63,11 @@ class Instantiate
 
             }
             //Make sure args are an array
-            if($args !== NULL && $args !== FALSE){
+            if ($args !== null && $args !== false) {
                 $args = (!is_array($args)) ? array($args) : $args;
-                if(is_array($args)){
-                    $c =count(array_filter(array_keys($args), 'is_string'));
-                    if(count(array_filter(array_keys($args), 'is_string')) > 0){
+                if (is_array($args)) {
+                    $c = count(array_filter(array_keys($args), 'is_string'));
+                    if (count(array_filter(array_keys($args), 'is_string')) > 0) {
                         $args = [$args];
                     }
                 }
@@ -75,8 +75,7 @@ class Instantiate
 
             $instance = Instantiate::instantiate($class, $args);
 
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
 
@@ -94,9 +93,8 @@ class Instantiate
 //        if (version_compare(phpversion(), '5.6.0') !== -1) {
 //            $instance = new $class(...$args);
 //        } else {
-            $reflect = new \ReflectionClass($class);
-            $instance = ($args === null || $args === false) ? $reflect->newInstanceArgs(
-            ) : $reflect->newInstanceArgs($args);
+        $reflect = new \ReflectionClass($class);
+        $instance = ($args === null || $args === false) ? $reflect->newInstanceArgs() : $reflect->newInstanceArgs($args);
 //        }
 
         return $instance;

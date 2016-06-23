@@ -20,12 +20,14 @@ class DebugLogger extends AbstractLogger
 
     private $index;
 
-    public function __construct(\PHPUnit_Framework_TestCase $test){
+    public function __construct(\PHPUnit_Framework_TestCase $test)
+    {
         $this->owner = $test;
         $this->index = 0;
     }
 
-    public function reset(){
+    public function reset()
+    {
         $index = 0;
     }
 
@@ -37,13 +39,15 @@ class DebugLogger extends AbstractLogger
      * @param array $context
      * @return null
      */
-    public function log($level, $message, array $context = array()){
+    public function log($level, $message, array $context = array())
+    {
 
-        $this->owner->assertArrayHasKey($this->index,$this->expected);
-        $this->owner->assertStringStartsWith($this->expected[$this->index++],$message);
+        $this->owner->assertArrayHasKey($this->index, $this->expected);
+        $this->owner->assertStringStartsWith($this->expected[$this->index++], $message);
     }
 
-    public function setExpectedMessages(array $messages){
+    public function setExpectedMessages(array $messages)
+    {
         $this->expected = $messages;
     }
 }
