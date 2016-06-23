@@ -9,8 +9,8 @@
 
 namespace twhiston\twLib\Discovery;
 
-use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use RegexIterator;
 
 class FindByNamespace
@@ -26,14 +26,20 @@ class FindByNamespace
      */
     public function __construct($path = null)
     {
-        $this->path = ($path === null)?__DIR__:$path;
+        $this->path = ($path === null) ? __DIR__ : $path;
         $this->data = [];
     }
 
-    public function find($needle = null, $rebuild = FALSE)
+    public function find($needle = null, $rebuild = false)
     {
-        if($rebuild === TRUE || empty($this->data))
-        {
+        $this->buildData($rebuild);
+        return $this->filterData($needle);
+
+    }
+
+    protected function buildData($rebuild)
+    {
+        if ($rebuild === true || empty($this->data)) {
             $allFiles = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->path));
             $phpFiles = new RegexIterator($allFiles, '/\.php$/');
             foreach ($phpFiles as $phpFile) {
@@ -43,7 +49,6 @@ class FindByNamespace
                 for ($index = 0; isset($tokens[$index]); $index++) {
                     if (!isset($tokens[$index][0])) {
                         continue;
-
                     }
                     if (T_NAMESPACE === $tokens[$index][0]) {
                         $index += 2; // Skip namespace keyword and whitespace
@@ -53,20 +58,21 @@ class FindByNamespace
                     }
                     if (T_CLASS === $tokens[$index][0]) {
                         $index += 2; // Skip class keyword and whitespace
-                        $this->data[] = $namespace.'\\'.$tokens[$index][1];
+                        $this->data[] = $namespace . '\\' . $tokens[$index][1];
                     }
                 }
             }
         }
-
-        return array_values(array_filter($this->data, function ($var) use ($needle) {
-            if (strpos($var, $needle) !== false) {
-                return TRUE;
-            }
-            return FALSE;
-        }));
-
     }
 
+    protected function filterData($needle)
+    {
+        return array_values(array_filter($this->data, function ($var) use ($needle) {
+            if (strpos($var, $needle) !== false) {
+                return true;
+            }
+            return false;
+        }));
+    }
 
 }
