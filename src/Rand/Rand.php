@@ -104,11 +104,11 @@ class Rand
             $num = 0;
             do {
                 $num = hexdec(
-                    bin2hex(openssl_random_pseudo_bytes($bytes, $secure))
-                  ) % $bits_max;
+                        bin2hex(openssl_random_pseudo_bytes($bytes, $secure))
+                    ) % $bits_max;
                 if ($secure === false) {
                     throw new TwLibException(
-                      'Non secure value generated. This is a system issue'
+                        'Non secure value generated. This is a system issue'
                     );
                 }
                 if ($num >= $range) {
@@ -148,7 +148,7 @@ class Rand
             $string = bin2hex(openssl_random_pseudo_bytes($length, $secure));
             if ($secure === false) {
                 throw new TwLibException(
-                  'Non secure string generated. This is a system issue'
+                    'Non secure string generated. This is a system issue'
                 );
             }
         }

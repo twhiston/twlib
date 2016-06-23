@@ -74,7 +74,7 @@ class Stack implements \ArrayAccess, \Iterator, \Countable
     public function offsetSet($offset, $value)
     {
         throw new TwLibException(
-          'Do not set stack references with the array operator'
+            'Do not set stack references with the array operator'
         );
     }
 
