@@ -28,6 +28,12 @@ class FindByNamespace
     {
         $this->path = ($path === null) ? __DIR__ : $path;
         $this->data = [];
+        $this->data[$path] = [];
+    }
+
+    public function setPath($path)
+    {
+        $this->path = $path;
     }
 
     public function find($needle = null, $rebuild = false)
@@ -39,7 +45,7 @@ class FindByNamespace
 
     protected function buildData($rebuild)
     {
-        if ($rebuild === true || empty($this->data)) {
+        if ($rebuild === true || empty($this->data[$this->path])) {
             $allFiles = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->path));
             $phpFiles = new RegexIterator($allFiles, '/\.php$/');
             foreach ($phpFiles as $phpFile) {
@@ -66,7 +72,7 @@ class FindByNamespace
             if (T_CLASS === $tokens[$index][0]) {
                 $index += 2; // Skip class keyword and whitespace
                 if (is_array($tokens[$index]) && array_key_exists(1, $tokens[$index])) {
-                    $this->data[] = $namespace . '\\' . $tokens[$index][1];
+                    $this->data[$this->path][] = $namespace . '\\' . $tokens[$index][1];
                 }
             }
         }
@@ -75,7 +81,7 @@ class FindByNamespace
 
     protected function filterData($needle)
     {
-        return array_values(array_filter($this->data, function ($var) use ($needle) {
+        return array_values(array_filter($this->data[$this->path], function ($var) use ($needle) {
             if (strpos($var, $needle) !== false) {
                 return true;
             }
