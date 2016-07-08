@@ -12,6 +12,7 @@ namespace twhiston\twLib\Discovery;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RegexIterator;
+use twhiston\twLib\Str\Str;
 
 class FindByNamespace
 {
@@ -36,31 +37,51 @@ class FindByNamespace
         $this->path = $path;
     }
 
+    /**
+     * @return null
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+
+
     public function find($needle = null, $rebuild = false)
     {
         $this->buildData($rebuild);
         return $this->filterData($needle);
-
     }
 
     protected function buildData($rebuild)
     {
+
         if ($rebuild === true || empty($this->data[$this->path])) {
             $allFiles = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->path));
             $phpFiles = new RegexIterator($allFiles, '/\.php$/');
+            $this->data[$this->path] = [];
             foreach ($phpFiles as $phpFile) {
                 //tokenize file
-                if (file_exists($phpFile->getRealPath())) {
-                    $content = file_get_contents($phpFile->getRealPath());
-                    $this->processTokens(token_get_all($content));
-                } else {
-                    $this->data[$this->path] = [];
+                $realPath = $this->getRealPath($phpFile);
+                if (file_exists($realPath)) {
+                    $content = file_get_contents($realPath);
+                    $this->processTokens(token_get_all($content), $this->path);
                 }
             }
         }
     }
 
-    protected function processTokens(array $tokens)
+    protected function getRealPath($phpFile)
+    {
+        if (Str::startsWith($this->path, ['phar'])) {
+            $realPath = $phpFile->getPath() . '/' . $phpFile->getFilename();
+        } else {
+            $realPath = $phpFile->getRealPath();
+        }
+        return $realPath;
+    }
+
+    protected function processTokens(array $tokens, $realPath)
     {
         $namespace = '';
         for ($index = 0; isset($tokens[$index]); $index++) {
@@ -76,7 +97,7 @@ class FindByNamespace
             if (T_CLASS === $tokens[$index][0]) {
                 $index += 2; // Skip class keyword and whitespace
                 if (is_array($tokens[$index]) && array_key_exists(1, $tokens[$index])) {
-                    $this->data[$this->path][] = $namespace . '\\' . $tokens[$index][1];
+                    $this->data[$realPath][] = $namespace . '\\' . $tokens[$index][1];
                 }
             }
         }

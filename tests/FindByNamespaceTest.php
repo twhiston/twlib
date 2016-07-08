@@ -15,6 +15,13 @@ use twhiston\twLib\Discovery\FindByNamespace;
 class FindByNamespaceTest extends \PHPUnit_Framework_TestCase
 {
 
+    public function testPathSetGet()
+    {
+        $finder = new FindByNamespace();
+        $finder->setPath('this/is/a/path');
+        $this->assertEquals('this/is/a/path',$finder->getPath());
+    }
+
     public function testFindByNamespace()
     {
         $finder = new FindByNamespace(__DIR__.'/../src');
