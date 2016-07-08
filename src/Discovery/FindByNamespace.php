@@ -50,8 +50,10 @@ class FindByNamespace
             $phpFiles = new RegexIterator($allFiles, '/\.php$/');
             foreach ($phpFiles as $phpFile) {
                 //tokenize file
-                $content = file_get_contents($phpFile->getRealPath());
-                $this->processTokens(token_get_all($content));
+                if (file_exists($phpFile->getRealPath())) {
+                    $content = file_get_contents($phpFile->getRealPath());
+                    $this->processTokens(token_get_all($content));
+                }
             }
         }
     }
