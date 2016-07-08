@@ -26,7 +26,7 @@ class FindByNamespace
      */
     public function __construct($path = null)
     {
-        $this->path = ($path === null) ? __DIR__ : $path;
+        $this->path = ($path === null || $path === '') ? __DIR__ : $path;
         $this->data = [];
         $this->data[$path] = [];
     }

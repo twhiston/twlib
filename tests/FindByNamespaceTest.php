@@ -21,4 +21,11 @@ class FindByNamespaceTest extends \PHPUnit_Framework_TestCase
         $found = $finder->find('twhiston\\twLib\\Discovery');
         $this->assertEquals('twhiston\\twLib\\Discovery\\FindByNamespace',$found[0]);
     }
+
+    public function testNoNamespace()
+    {
+        $finder = new FindByNamespace('');
+        $found = $finder->find();
+        $this->assertEmpty($found);
+    }
 }
