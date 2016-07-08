@@ -53,6 +53,8 @@ class FindByNamespace
                 if (file_exists($phpFile->getRealPath())) {
                     $content = file_get_contents($phpFile->getRealPath());
                     $this->processTokens(token_get_all($content));
+                } else {
+                    $this->data[$this->path] = [];
                 }
             }
         }
